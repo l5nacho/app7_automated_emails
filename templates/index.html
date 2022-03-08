@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<div class="container-fluid">
+    <table class="table table-striped"
+        <thead>
+          <tr>
+              <th>Id</th>
+              <th>Usuario</th>
+              <th>Email</th>
+              <th>Topic</th>
+              <th>Date Added</th>
+              <th>Date Modified</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for user in users%}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.topic }}</td>
+                    <td>{{ user.date_add }}</td>
+                    <td>{{ user.date_mod }}</td>
+                    <td><a href="#" class="btn btn-primary">Edit</a></td>
+                    <td><a href="#" class="btn btn-danger">Delete</a></td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}
