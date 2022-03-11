@@ -2,7 +2,6 @@
 
 import requests
 
-
 class NewsFeed:
     api_key = 'd1b9ee17a8e44b23b72a3ac33d12aad2'
 
