@@ -1,5 +1,5 @@
 from app import app, db
-from flask import render_template, flash, url_for, redirect, get_flashed_messages
+from flask import render_template, flash, url_for, redirect, get_flashed_messages, make_response, request
 from models import User
 from datetime import datetime
 
@@ -9,9 +9,17 @@ import forms
 @app.route('/')
 @app.route('/index')
 def index():
+    custom_cookie = request.cookies.get('custom_cookie', 'undefined')
     users = User.query.all()
     return render_template('index.html',
                            users=users)
+
+@app.route('/cookie')
+def cookie():
+    response = make_response('<h1>Cookies</h1>')
+    response.set_cookie('custom_cookie', 'Nacho')
+    return response
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -29,3 +37,9 @@ def register():
         return redirect(url_for('index'))
     return render_template('register.html',
                            form=form)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    login_form = forms.LoginForm()
+    return render_template('login.html',
+                           form=login_form)

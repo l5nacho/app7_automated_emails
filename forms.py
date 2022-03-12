@@ -11,3 +11,7 @@ class AddUserForm(FlaskForm):
     topic = StringField('Topic: ',
                         [validators.InputRequired(message='Ingrese un tema')])
     submit = SubmitField('Register')
+
+class LoginForm(FlaskForm):
+    user = StringField('Usuario')
+    password = StringField('Contraseña')
