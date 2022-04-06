@@ -1,5 +1,5 @@
 from app import app, db
-from flask import render_template, flash, url_for, redirect, get_flashed_messages, make_response, request
+from flask import render_template, flash, url_for, redirect, get_flashed_messages, make_response, request, session
 from models import User
 from datetime import datetime
 
@@ -7,9 +7,13 @@ import forms
 
 
 @app.route('/')
+def home():
+    return '<h1>Carrusel de imagenes estaticas</h1>'
+
 @app.route('/index')
 def index():
     custom_cookie = request.cookies.get('custom_cookie', 'undefined')
+    print(custom_cookie)
     users = User.query.all()
     return render_template('index.html',
                            users=users)
@@ -40,6 +44,14 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    login_form = forms.LoginForm()
+    login_form = forms.loginForm()
+    if request.method == 'POST' and login_form.validate():
+        session['username'] = login_form.user.data
     return render_template('login.html',
                            form=login_form)
+
+@app.route('/logout')
+def logout():
+    if 'username' in session:
+        session.pop('username')
+    return redirect(url_for('login'))

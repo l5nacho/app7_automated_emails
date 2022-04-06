@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, PasswordField
 from wtforms import validators
 
 class AddUserForm(FlaskForm):
@@ -12,6 +12,7 @@ class AddUserForm(FlaskForm):
                         [validators.InputRequired(message='Ingrese un tema')])
     submit = SubmitField('Register')
 
-class LoginForm(FlaskForm):
+class loginForm(FlaskForm):
     user = StringField('Usuario')
     password = StringField('Contraseña')
+    submit = SubmitField('Login')

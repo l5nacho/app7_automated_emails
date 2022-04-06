@@ -4,19 +4,29 @@
 {% from "_macro.html" import validators %}
 <link rel="stylesheet" type="text/css" href="static/login.css">
 <div class="wrapper fadeInDown">
-  <div id="formContent">
+  <form id="formContent">
     <!-- Tabs Titles -->
 
-    <!-- Icon -->
+    <!-- Icon
     <div class="fadeIn first">
       <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
-    </div>
+    </div>-->
 
-    <!-- Login Form -->
-    <form>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+    <!-- Login Form
+    <form id="loginForm" method="POST">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="text" class="fadeIn second" name="login" placeholder="login" value="{{ form.user }}">
       <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
       <input type="submit" class="fadeIn fourth" value="Log In">
+    </form>-->
+
+    <form id="loginForm" method="POST">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div>{{ form.user.label }} {{ form.user(class="form-control") }}</div>
+      <div>{{ form.password.label }} {{ form.password(class="form-control") }}</div>
+      <div class="col">
+        {{ form.submit(class="btn btn-primary") }}
+        </div>
     </form>
 
     <!-- Remind Passowrd -->
