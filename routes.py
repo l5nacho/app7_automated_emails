@@ -12,8 +12,11 @@ def home():
 
 @app.route('/index')
 def index():
-    custom_cookie = request.cookies.get('custom_cookie', 'undefined')
-    print(custom_cookie)
+    # custom_cookie = request.cookies.get('custom_cookie', 'undefined')
+    # print(custom_cookie)
+    if 'username' in session:
+        username = session['username']
+        print(username)
     users = User.query.all()
     return render_template('index.html',
                            users=users)
