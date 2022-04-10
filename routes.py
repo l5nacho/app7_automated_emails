@@ -4,6 +4,7 @@ from models import User
 from datetime import datetime
 
 import forms
+import json
 
 
 @app.route('/')
@@ -58,3 +59,9 @@ def logout():
     if 'username' in session:
         session.pop('username')
     return redirect(url_for('login'))
+
+@app.route('/ajax-login', methods=['POST'])
+def ajax_login():
+    username = request.form['username']
+    response = {'status': 200, 'username': username, 'id': 1}
+    return json.dumps(response)

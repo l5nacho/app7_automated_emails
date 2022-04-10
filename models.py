@@ -11,3 +11,9 @@ class User(db.Model):
     def __repr__(self):
         return(f'Usuario {self.name} con email {self.email} '
                f'ha sido creado el {self.date_add}')
+
+class Username(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    username = db.column(db.String(20), unique=True)
+    password = db.column(db.String(66))
+    date_created = db.column(db.Date)
