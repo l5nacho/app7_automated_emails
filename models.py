@@ -14,6 +14,9 @@ class User(db.Model):
 
 class Username(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
-    username = db.column(db.String(20), unique=True)
-    password = db.column(db.String(66))
-    date_created = db.column(db.Date)
+    username = db.Column(db.String(20), unique=True, nullable=False)
+    password = db.Column(db.String(66), nullable=False)
+    date_created = db.Column(db.Date)
+
+    def __repr__(self):
+        return(f'Usuario {self.username} ha sido creado el {self.date_created}')

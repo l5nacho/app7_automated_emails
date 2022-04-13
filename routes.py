@@ -1,6 +1,6 @@
 from app import app, db
 from flask import render_template, flash, url_for, redirect, get_flashed_messages, make_response, request, session
-from models import User
+from models import User, Username
 from datetime import datetime
 
 import forms
