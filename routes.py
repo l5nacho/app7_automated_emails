@@ -1,7 +1,6 @@
 from app import app, db
 from flask import render_template, flash, url_for, redirect, get_flashed_messages, make_response, request, session
 from models import User, Admin
-from datetime import datetime
 
 import forms
 import json
@@ -32,17 +31,16 @@ def cookie():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = forms.AddUserForm()
-    if form.validate_on_submit():
-        user = User(name=form.name.data,
-                    user=form.user.data,
+    if request.method == 'POST' and form.validate_on_submit():
+        user_info = User(name=form.name.data,
+                    username=form.user.data,
                     password=form.password.data,
-                    topic=form.topic.data,
                     email=form.email.data,
-                    date_add=datetime.utcnow(),
-                    date_mod=datetime.utcnow())
-        db.session.add(user)
+                    topic=None)
+        print(user_info)
+        db.session.add(user_info)
         db.session.commit()
-        print(f'data added {user.name} {user.email} {user.topic}')
+        print(f'data added {user_info.name} {user_info.email} {user_info.topic}')
         flash('User added to the database')
         return redirect(url_for('index'))
     return render_template('register.html',

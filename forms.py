@@ -7,12 +7,13 @@ class AddUserForm(FlaskForm):
                        [validators.InputRequired(message='Por favor ingrese un nombre')])
     user = StringField('Usuario',
                        [validators.InputRequired(message='Por favor ingrese un usuario')])
-    password = PasswordField('Contraseña')
+    password = PasswordField('Contraseña',
+                             [validators.InputRequired(message='Por favor ingrese un password')])
     email = StringField('Email: ',
                         [validators.InputRequired(message='Por favor ingrese un email'),
                          validators.Email(message='Ingrese un email valido')])
-    topic = StringField('Topic: ',
-                        [validators.InputRequired(message='Ingrese un tema')])
+    # topic = StringField('Topic: ',
+    #                     [validators.InputRequired(message='Ingrese un tema')])
     submit = SubmitField('Register')
 
 class loginForm(FlaskForm):
