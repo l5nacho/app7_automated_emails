@@ -1,6 +1,6 @@
 from app import app, db
 from flask import render_template, flash, url_for, redirect, get_flashed_messages, make_response, request, session
-from models import User, Username
+from models import User, Admin
 from datetime import datetime
 
 import forms
@@ -34,8 +34,10 @@ def register():
     form = forms.AddUserForm()
     if form.validate_on_submit():
         user = User(name=form.name.data,
-                    email=form.email.data,
+                    user=form.user.data,
+                    password=form.password.data,
                     topic=form.topic.data,
+                    email=form.email.data,
                     date_add=datetime.utcnow(),
                     date_mod=datetime.utcnow())
         db.session.add(user)

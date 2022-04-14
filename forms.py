@@ -5,6 +5,9 @@ from wtforms import validators
 class AddUserForm(FlaskForm):
     name = StringField('Name: ',
                        [validators.InputRequired(message='Por favor ingrese un nombre')])
+    user = StringField('Usuario',
+                       [validators.InputRequired(message='Por favor ingrese un usuario')])
+    password = PasswordField('Contraseña')
     email = StringField('Email: ',
                         [validators.InputRequired(message='Por favor ingrese un email'),
                          validators.Email(message='Ingrese un email valido')])

@@ -11,14 +11,19 @@
             {{validators(form.name)}}
         </div>
         <div class="row">
+            <div class="col-sm-1"><h4>{{ form.user.label }}</h4></div>
+            <div class="col-sm-11">{{ form.user(class="form-control") }}</div>
+            {{validators(form.user)}}
+        </div>
+        <div class="row">
+            <div class="col-sm-1"><h4>{{ form.password.label }}</h4></div>
+            <div class="col-sm-11">{{ form.password(class="form-control") }}</div>
+            {{validators(form.password)}}
+        </div>
+        <div class="row">
             <div class="col-sm-1"><h4>{{ form.email.label }}</h4></div>
             <div class="col-sm-11">{{ form.email(class="form-control") }}</div>
             {{validators(form.email)}}
-        </div>
-        <div class="row">
-            <div class="col-sm-1"><h4>{{ form.topic.label }}</h4></div>
-            <div class="col-sm-11">{{ form.topic(class="form-control") }}</div>
-            {{validators(form.topic)}}
         </div>
         <div class="col">
         {{ form.submit(class="btn btn-primary") }}
