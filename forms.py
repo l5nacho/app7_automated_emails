@@ -22,3 +22,8 @@ class loginForm(FlaskForm):
                        render_kw={'placeholder': 'Introduce el Usuario'})
     password = PasswordField('Contraseña', render_kw={'placeholder': 'Introduce la contraseña'})
     submit = SubmitField('Login')
+
+class TopicForm(FlaskForm):
+    topic = StringField('Topic',
+                       [validators.InputRequired(message='Por favor ingrese un tema')])
+    submit = SubmitField('Submit')
