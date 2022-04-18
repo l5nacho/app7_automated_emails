@@ -10,28 +10,28 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     username = db.Column(db.String(20), unique=True, nullable=False)
-    password = db.Column(db.String(66), nullable=False)
+    password_hash = db.Column(db.String(66), nullable=False)
     email = db.Column(db.String(100), nullable=False)
     topic = db.relationship('Topic')
+    admin = db.Column(db.Boolean, default=False)
     date_add = db.Column(db.Date, nullable=False, default=datetime.utcnow())
     date_mod = db.Column(db.Date, nullable=True, default=datetime.utcnow())
 
-    def __init__(self, name, username, password, email):
-        self.name = name
-        self.username = username
-        self.password = self._secure_password(password)
-        self.email = email
-
-
     def __repr__(self):
-        return(f'Hola {self.name} Usuario {self.username} con id {} mail {self.email} '
-               f'ha sido creado el {self.date_add}')
+        return (u'<{self.__class__.__name__}: {self.id}>'.format(self=self))
+        # return(f'Hola {self.name} Usuario {self.username} con mail {self.email} '
+        #        f'ha sido creado el {self.date_add}')
 
-    def _secure_password(self, password):
-        return generate_password_hash(password)
+    @property
+    def password(self):
+        raise AttributeError('Password is not a readable attribute')
+
+    @password.setter
+    def password(self, password):
+        self.password_hash = generate_password_hash(password)
 
     def verify_password(self, password):
-        return check_password_hash(self.password, password)
+        return check_password_hash(self.password_hash, password)
 
 class Topic(db.Model):
 

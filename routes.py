@@ -54,12 +54,14 @@ def login():
         password = login_form.password.data
 
         user = User.query.filter_by(username=username).first()
+        print(user)
 
         if user is not None and user.verify_password(password):
             success_message = f'Bienvenido {user.name}'
             flash(success_message)
 
             session['username'] = username
+            session['user_id'] = user.id
             print(session)
             return redirect(url_for('index'))
 
